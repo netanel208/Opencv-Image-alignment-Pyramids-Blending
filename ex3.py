@@ -93,6 +93,9 @@ def GaussianPyramid(im: np.ndarray, maxLevels: int, filterSize: int):
         cv2.imshow('IMAGE', new_im)
         cv2.waitKey(0)
         new_im = cv2.filter2D(new_im, -1, kernel)
+        new_im = cv2.filter2D(new_im, -1, kernel.T)
+        # new_im = np.convolve(new_im, kernel)
+        # new_im = np.convolve(new_im, kernel.T)
         new_im = reduce(new_im)
     return ans, kernel
 
@@ -134,7 +137,11 @@ def LaplacianPyramid(im: np.ndarray, maxLevels: int, filterSize: int):
     Gs, kernel = GaussianPyramid(new_im, maxLevels+1, filterSize)
     for i in range(1, maxLevels+1):  # Li = Gi - expand(Gi+1)
         Gi = Gs[i-1]
+        cv2.imshow('Gi', Gi)
+        cv2.waitKey(0)
         Gi_1 = Gs[i]
+        cv2.imshow('Gi+1', expand(Gi_1, kernel))
+        cv2.waitKey(0)
         Li = Gi - expand(Gi_1, 0)
         ans[i-1] = Li
         cv2.imshow('implement laplacian', Li)
@@ -145,21 +152,16 @@ def expand(im: np.ndarray, kernel: np.ndarray):
     ex_im = np.zeros((im.shape[0]*2, im.shape[1]*2))
     ans = ex_im.copy()
 
-    # Init the matrix with zero pading and values
+    # Init the matrix with zero padding and values
     for i in range(ex_im.shape[0]):
         for j in range(ex_im.shape[1]):
-            if j%2 == 0:
+            if j%2 == 1:
                 ex_im[i][j] = im[i//2][j//2]
-
-    # ans = cv2.filter2D(ex_im, -1, np.array([0.5, 1, 0.5]))
-    # print(ans)
-    # cv2.imshow('fig', ans)
-    # cv2.waitKey(0)
 
     # Cross Coralletion
     for i in range(ex_im.shape[0]):
         for j in range(1, ex_im.shape[1]-1):
-            ans[i][j] = 0.5*ex_im[i][j-1] + 1*ex_im[i][j] + 0.5*ex_im[i][j+1]
+            ans[i][j] = 0.5*ex_im[i][j-1] + 1.0*ex_im[i][j] + 0.5*ex_im[i][j+1]
     return ans
 
 
@@ -183,5 +185,5 @@ a2 = np.array([[0.0, 1.0, 1.0],
 img = cv2.imread('lena.png')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 img = padding(img)
-GaussianPyramid(img, 5, 5)
-# LaplacianPyramid(img, 2, 5)
+# GaussianPyramid(img, 5, 5)
+LaplacianPyramid(img, 5, 5)
