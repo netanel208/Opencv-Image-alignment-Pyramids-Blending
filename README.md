@@ -23,3 +23,7 @@ Gaussian Pyramid:
 ![alt text](https://github.com/netanel208/opencv-Image-alignment-Pyramids-Blending/blob/master/image/gpyr4.PNG)
 <br />
 ![alt text](https://github.com/netanel208/opencv-Image-alignment-Pyramids-Blending/blob/master/image/gpyr5.PNG)
+<br />
+<br />
+Laplacian Pyramid:
+
