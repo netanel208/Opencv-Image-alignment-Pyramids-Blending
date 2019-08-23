@@ -26,4 +26,14 @@ Gaussian Pyramid:
 <br />
 <br />
 Laplacian Pyramid:
-
+<br />
+![alt text](https://github.com/netanel208/opencv-Image-alignment-Pyramids-Blending/blob/master/image/lpyr1.PNG)
+<br />
+![alt text](https://github.com/netanel208/opencv-Image-alignment-Pyramids-Blending/blob/master/image/lpyr2.PNG)
+<br />
+![alt text](https://github.com/netanel208/opencv-Image-alignment-Pyramids-Blending/blob/master/image/lpyr3.PNG)
+<br />
+![alt text](https://github.com/netanel208/opencv-Image-alignment-Pyramids-Blending/blob/master/image/lpyr4.PNG)
+<br />
+![alt text](https://github.com/netanel208/opencv-Image-alignment-Pyramids-Blending/blob/master/image/lpyr5.PNG)
+<br />
